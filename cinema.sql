@@ -190,3 +190,9 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 (10, 0, 32, 4),
 (0, 0, 33, 9),
 (25, 0, 58, 6);
+
+SELECT * FROM movies;
+SELECT * FROM departments;
+SELECT * FROM employees;
+SELECT * FROM customers;
+SELECT * FROM services;
