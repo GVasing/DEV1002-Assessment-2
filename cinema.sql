@@ -284,9 +284,16 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 -- WHERE department_id = dept_id AND employee_id = emp_id AND reviews IS NOT NULL
 -- ORDER BY reviews DESC;
 
--- More Complex Table Joining
+----------------------------------------------------------------------------------------------------------------------------------------
 
 -- Using Inner Join
+
+-- SELECT e.first_name, e.last_name, SUM(s.transaction_amount + s.upsell_amount) AS "Total Sales + Upsell Amount"
+-- FROM employees e INNER JOIN services s ON e.employee_id = s.emp_id
+-- GROUP BY e.first_name, e.last_name
+-- ORDER BY SUM(s.transaction_amount + s.upsell_amount) DESC;
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 -- Using Left Join
 
@@ -294,3 +301,31 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 -- FROM employees e
 -- LEFT JOIN services s ON e.employee_id = s.emp_id
 -- GROUP BY e.first_name, e.last_name, e.years_worked;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Queries that involve selecting, filtering, grouping, and ordering
+
+-- SELECT d.department_name, ROUND(AVG(s.reviews),2)
+-- FROM departments d
+-- INNER JOIN employees e ON d.department_id = e.dept_id
+-- INNER JOIN services s ON e.employee_id = s.emp_id
+-- WHERE e.years_worked > 2
+-- GROUP BY d.department_name
+-- ORDER BY AVG(s.reviews) DESC;
+
+-- SELECT DISTINCT employment, ROUND(AVG(hourly_rate), 2) AS "Average Rate"
+-- FROM employees
+-- WHERE years_worked < 3
+-- GROUP BY employment
+-- ORDER BY "Average Rate" DESC;
+
+-- SELECT title, COUNT(customer_id) AS "Count Per Movie"
+-- FROM movies m
+-- INNER JOIN customers c ON m.movie_id = c.movie_id
+-- WHERE rating != 'PG'
+-- GROUP BY title
+-- ORDER BY "Count Per Movie" DESC;
+
+
+-- Delete transaction amount from service_id 14, as Phillip Yang is an usher and should not have a positive transaction amount.
