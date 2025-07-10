@@ -1,11 +1,3 @@
--- Create Database in Postresql in terminal first
--- Create a user with a password, make it the owner of the database and grant it all privileges
--- The rest can be done in the IDE(Written here)
--- Command to run in the terminal to run the sql file 'psql -U *username*(i.e. postgres or specific user) -d *database name* -f *filename*.sql'
--- In this example it will be 'psql -U cinema_dev -d cinema_db -f cinema.sql'
--- Make sure to CREATE TABLE from least dependent to most dependent, and in reverse when DROP TABLE IF EXIST
-
-
 DROP TABLE IF EXISTS services;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS customers;
@@ -198,11 +190,3 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 (10, 0, 32, 4),
 (0, 0, 33, 9),
 (25, 0, 58, 6);
-
-
--- SELECT * FROM movies;
--- SELECT * FROM departments;
--- SELECT * FROM employees;
--- SELECT * FROM customers;
--- SELECT * FROM services;
-SELECT first_name, last_name, transaction_amount, upsell_amount FROM employees, services WHERE dept_id = 1;
