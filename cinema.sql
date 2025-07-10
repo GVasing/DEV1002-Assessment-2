@@ -327,5 +327,23 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 -- GROUP BY title
 -- ORDER BY "Count Per Movie" DESC;
 
+----------------------------------------------------------------------------------------------------------------------------------------
 
--- Delete transaction amount from service_id 14, as Phillip Yang is an usher and should not have a positive transaction amount.
+-- Updating tables
+
+-- UPDATE services
+-- SET transaction_amount = 0
+-- WHERE service_id = 14;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Insering new records in tables
+
+-- INSERT INTO movies (title, rating, run_time, genre) VALUES
+-- ('Karate Kid: Legends', 'PG', 94, 'Family/Action');
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+--  Deleting records
+
+-- DELETE FROM movies WHERE run_time <= 100;
