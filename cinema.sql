@@ -126,7 +126,7 @@ INSERT INTO employees (first_name, last_name, employment, hourly_rate, years_wor
 ('Brian', 'Jordan', 'Casual', 35, 2, 1),
 ('Alexis', 'Harper', 'Part-Time', 20, 1, 1),
 ('Phillip', 'Yang', 'Full-Time', 30, 5, 3),
-('Victoria', 'Hoffman', 'Full_Time', 30, 4, 2),
+('Victoria', 'Hoffman', 'Full-Time', 30, 4, 2),
 ('Savannah', 'Russo', 'Part-Time', 20, 2, 3);
 
 INSERT INTO services (reviews, transaction_amount, upsell_amount, cust_id, emp_id) VALUES
@@ -191,8 +191,106 @@ INSERT INTO services (transaction_amount, upsell_amount, cust_id, emp_id) VALUES
 (0, 0, 33, 9),
 (25, 0, 58, 6);
 
-SELECT * FROM movies;
-SELECT * FROM departments;
-SELECT * FROM employees;
-SELECT * FROM customers;
-SELECT * FROM services;
+---------------------------------------------------------------------------------------------------------------------------------------
+-- -- Basic queries
+
+-- SELECT * FROM movies;
+-- SELECT * FROM departments;
+-- SELECT * FROM employees;
+-- -- SELECT * FROM customers;
+-- -- SELECT * FROM services;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Selecting specific column
+
+-- SELECT title FROM movies;
+-- SELECT department_name FROM departments;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Selecting distinct to avoid duplication
+
+-- SELECT DISTINCT rating FROM movies;
+-- SELECT DISTINCT employment, hourly_rate FROM employees;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Using a where clause
+
+-- SELECT title FROM movies WHERE rating = 'PG';
+-- SELECT first_name, last_name FROM employees WHERE years_worked >= 3;
+-- SELECT DISTINCT membership_num FROM customers WHERE membership_status = 'Yes';
+-- SELECT first_name, last_name, employee_id FROM employees WHERE hourly_rate > 30;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Using an order by clause
+
+-- SELECT first_name, last_name, years_worked
+-- FROM employees
+-- ORDER BY years_worked DESC;
+
+-- SELECT * FROM movies
+-- ORDER BY run_time;
+
+-- SELECT transaction_amount, emp_id 
+-- FROM services 
+-- WHERE emp_id = (SELECT employee_id FROM employees WHERE first_name = 'John') OR emp_id = (SELECT employee_id FROM employees WHERE first_name = 'Jane')
+-- ORDER BY transaction_amount;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Using LIKE keyword and pattern match search condition
+
+-- SELECT first_name, last_name
+-- FROM employees
+-- WHERE employment LIKE '%Time';
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Aggregate Functions
+
+-- SELECT COUNT(*) FROM employees;
+-- SELECT SUM(transaction_amount) AS "Total Sales", SUM(upsell_amount) AS "Total Upsell Sales" FROM services;
+-- SELECT AVG(transaction_amount) AS "Average Sales Amount", AVG(upsell_amount) AS "Average Upsell Amount" FROM services;
+-- SELECT ROUND(AVG(transaction_amount),2) AS "Average Sales Amount", ROUND(AVG(upsell_amount),2) AS "Average Upsell Amount" FROM services;
+-- SELECT MIN(transaction_amount), MAX(transaction_amount) FROM services;
+-- SELECT MIN(upsell_amount), MAX(upsell_amount) FROM services;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- Using the Group By clause
+
+-- SELECT first_name, last_name, years_worked, department_name, AVG(reviews)
+-- FROM employees, departments, services
+-- GROUP BY first_name;
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+-- -- Basic Joining Table queries
+
+-- SELECT first_name, last_name, department_name
+-- FROM employees, departments
+-- WHERE dept_id = department_id
+
+-- SELECT first_name, last_name, years_worked, department_name
+-- FROM employees, departments
+-- WHERE department_id = dept_id
+-- ORDER BY years_worked DESC;
+
+-- SELECT first_name, last_name, years_worked, department_name, reviews
+-- FROM employees, departments, services
+-- WHERE department_id = dept_id AND employee_id = emp_id AND reviews IS NOT NULL
+-- ORDER BY reviews DESC;
+
+-- More Complex Table Joining
+
+-- Using Inner Join
+
+-- Using Left Join
+
+-- SELECT e.first_name, e.last_name, e.years_worked, AVG(s.reviews) AS "Review out of 10"
+-- FROM employees e
+-- LEFT JOIN services s ON e.employee_id = s.emp_id
+-- GROUP BY e.first_name, e.last_name, e.years_worked;
