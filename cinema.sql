@@ -1,9 +1,14 @@
+-- Create database first.
+CREATE DATABASE cinema_db;
+
+-- Drop tables if they pre-exist.
 DROP TABLE IF EXISTS services;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS movies;
 
+-- Create tables for each entity in the erd.
 CREATE TABLE movies(
     movie_id SERIAL PRIMARY KEY,
     title VARCHAR(100) NOT NULL UNIQUE,
@@ -43,6 +48,8 @@ CREATE TABLE services(
     emp_id INT NOT NULL REFERENCES employees(employee_id) ON DELETE CASCADE
 );
 
+
+-- Insert values into the tables.
 INSERT INTO movies(title, rating, genre, run_time) VALUES
 ('Superman', 'M', 'Action/Sci-Fi', 130),
 ('Lilo & Stitch', 'PG', 'Comedy', 108),
